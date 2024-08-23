@@ -1,1 +1,0 @@
-{"version":3,"sources":["main.scss","variaveis.scss"],"names":[],"mappings":"AAEA,KACI,iBCHW,QDIX,MCHY","file":"../main.css","sourcesContent":["@use 'variaveis';\r\n\r\nbody {\r\n    background-color: variaveis.$corPrincipal;\r\n    color: variaveis.$corSecundaria;\r\n}","$corPrincipal: #141414;\r\n$corSecundaria: #ffff;"]}
