@@ -2,12 +2,8 @@ const gulp = require('gulp');
 const sass = require('gulp-sass')(require('sass'));
 const sourcemaps = require('gulp-sourcemaps');
 const unglify = require('gulp-uglify');
-
-function comprimeJavaScript() {
-    return gulp.src('./source/scripts/*.js')
-    .pipe(unglify())
-    .pipe(gulp.dest('./build/scripts'))
-}
+const obfuscate = require('gulp-obfuscate');
+const imagemin = require('gulp-imagemin');
 
 function compilaSass() {
     return gulp.src('./source/styles/main.scss')
@@ -19,8 +15,22 @@ function compilaSass() {
         .pipe(gulp.dest('./build/styles'));
 }
 
+function comprimeJavaScript() {
+    return gulp.src('./source/scripts/*.js')
+    .pipe(unglify())
+    .pipe(obfuscate())
+    .pipe(gulp.dest('./build/scripts'))
+}
+
+function comprimeImagens() {
+    return gulp.src('./source/images/*')
+    .pipe(imagemin())
+    .pipe(gulp.dest('./build/images'))
+}
+
 exports.sass = compilaSass;
+exports.javascript = comprimeJavaScript;
+exports.images = comprimeImagens;
 exports.watch = function() {
     gulp.watch('./source/styles/*.scss', { ignoreInitial: false}, gulp.series(compilaSass));
 }
-exports.javascript = comprimeJavaScript;
